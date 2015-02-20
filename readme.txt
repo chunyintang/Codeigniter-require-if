@@ -1,2 +1,0 @@
-Codeiginiter: Custom form validation. 
-
