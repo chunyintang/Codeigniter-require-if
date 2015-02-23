@@ -52,8 +52,12 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function required_if($str, $param)
   {
-    $field = explode(',',$param, 2)[0];
-    $value = explode(',',$param, 2)[1];
+    $field_explode = explode(',',$param, 2);
+    $value_explode = explode(',',$param, 2);
+
+    $field = $field_explode[0];
+    $value = $value_explode[1];
+        
     if(isset($_POST[$field]))
     {
       if($_POST[$field] == $value && is_null($str))
