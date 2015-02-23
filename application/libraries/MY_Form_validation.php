@@ -12,10 +12,9 @@ class MY_Form_validation extends CI_Form_validation {
 
   protected function _execute($row, $rules, $postdata = NULL, $cycles = 0)
   {
-    
     parent::_execute( $row, $rules, $postdata, $cycles );
-    
     $callback = FALSE;
+    
     if ( ! in_array('required', $rules) AND is_null($postdata))
     {
       // Before we bail out, does the rule contain a callback?
@@ -35,9 +34,10 @@ class MY_Form_validation extends CI_Form_validation {
     
     if(preg_match("/required_if\[(.*?),(.*?)\]/", implode(' ', $rules), $matches) AND $callback == FALSE)
     {
-      if(isset($_POST[$matches[1]])) {
-        if($_POST[$matches[1]] == $matches[2] AND is_null($postdata)) {
-
+      if(isset($_POST[$matches[1]]))
+      {
+        if($_POST[$matches[1]] == $matches[2] AND is_null($postdata))
+        {
           $message = sprintf("The %s field can not be empty", $this->_translate_fieldname($row['label']));
 
           $this->_field_data[$row['field']]['error'] = $message;
@@ -54,14 +54,22 @@ class MY_Form_validation extends CI_Form_validation {
   {
     $field = explode(',',$param, 2)[0];
     $value = explode(',',$param, 2)[1];
-    if(isset($_POST[$field])) {
-      if($_POST[$field] == $value && is_null($str)) {
+    if(isset($_POST[$field]))
+    {
+      if($_POST[$field] == $value && is_null($str))
+      {
         $this->CI->form_validation->set_message('required_if', 'the %s field can not be empty');
         return false;
-      } else {
+      }
+      else
+      {
         return true;
       }
-    } else {
+    
+     
+    }
+    else
+    {
       return true;
     }
   }
